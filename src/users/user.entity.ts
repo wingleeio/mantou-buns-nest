@@ -1,6 +1,7 @@
 import * as bcrypt from 'bcrypt';
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
+import { Entity, Column, BeforeInsert, OneToMany } from 'typeorm';
 import { CommonEntity } from '../common/common.entity';
+import { Post } from '../posts/post.entity';
 
 @Entity()
 export class User extends CommonEntity {
@@ -12,6 +13,9 @@ export class User extends CommonEntity {
 
 	@Column({ length: 256 })
 	password: string;
+
+	@OneToMany(() => Post, post => post.author)
+	posts: Promise<Post[]>;
 
 	@BeforeInsert()
 	async hashPassword() {

@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { AuthInput } from './auth.input';
 import { JwtService } from '@nestjs/jwt';
+import { UserType } from '../users/user.type';
 
 @Injectable()
 export class AuthService {
@@ -10,8 +11,8 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 	) {}
 
-	async validateUser({ email, password }: AuthInput): Promise<any> {
-		const user = await this.userService.findByEmail(email);
+	async validateUser({ email, password }: AuthInput): Promise<UserType> {
+		const user = await this.userService.findOneByEmail(email);
 		if (user && (await user.comparePassword(password))) {
 			return {
 				...user,

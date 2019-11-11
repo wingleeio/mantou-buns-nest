@@ -1,19 +1,13 @@
 import {
 	BaseEntity,
-	Column,
 	PrimaryGeneratedColumn,
-	Generated,
 	CreateDateColumn,
 	UpdateDateColumn,
 } from 'typeorm';
 
 export abstract class CommonEntity extends BaseEntity {
-	@PrimaryGeneratedColumn()
-	id: number;
-
-	@Column()
-	@Generated('uuid')
-	uuid: string;
+	@PrimaryGeneratedColumn('uuid')
+	id: string;
 
 	@CreateDateColumn()
 	created_at: string;

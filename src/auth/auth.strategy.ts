@@ -14,7 +14,7 @@ export class AuthStrategy extends PassportStrategy(Strategy) {
 
 	async validate(payload) {
 		const { email } = payload;
-		const user = await this.userService.findByEmail(email);
+		const user = await this.userService.findOneByEmail(email);
 
 		if (!user) {
 			throw new UnauthorizedException();

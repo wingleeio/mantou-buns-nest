@@ -8,4 +8,7 @@ export class UserType extends CommonType {
 
 	@Field()
 	readonly username: string;
+
+	@Field()
+	readonly token?: string;
 }
